@@ -16,7 +16,9 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@jjy/input": "^1.0.0"
+  },
   "name": "jjy-npm-template",
   "description": "The various npm packages used by developer jjy (jjayeon).",
   "version": "1.0.0",

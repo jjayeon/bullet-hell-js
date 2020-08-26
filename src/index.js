@@ -1,3 +1,7 @@
-var a = 0;
+import input from "@jjy/input";
 
-console.log(a);
+input.bind(" ", function () {
+  const newtext = document.createElement("p");
+  newtext.innerHTML = "haha nice";
+  document.body.appendChild(newtext);
+});
