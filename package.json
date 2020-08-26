@@ -17,7 +17,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@jjy/input": "^1.0.0"
+    "@jjy/input": "^1.0.0",
+    "mainloop.js": "^1.0.4"
   },
   "name": "jjy-npm-template",
   "description": "The various npm packages used by developer jjy (jjayeon).",
