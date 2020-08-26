@@ -1,6 +1,6 @@
-# jjy-npm-template
+# Bullet Hell JS
 
-A template npm project with some common packages installed and configured.
+A bullet hell game written in pure Javascript. Proof of concept for Input.js + Canvas. 
 
 ## packages:
 
@@ -11,3 +11,5 @@ Webpack as our build system.
 Babel for Javascript wrangling.
 
 ESLint and Prettier for code formatting.
+
+Mocha for unit tests.
