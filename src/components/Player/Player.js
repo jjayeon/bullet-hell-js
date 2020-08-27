@@ -1,15 +1,18 @@
 import playerimgurl from "./player.png";
 
 function Player(x, y) {
+  this.w = 50;
+  this.h = 50;
+
   this.x = x;
   this.vx = 0;
-  this.ax = 0;
-  this.lastX = this.x;
 
   this.y = y;
   this.vy = 0;
-  this.ay = 0;
-  this.lastY = this.y;
+
+  this.a = 1.8;
+  this.f = 0.3;
+  this.max = 8;
 
   const playerimg = new Image();
   playerimg.src = playerimgurl;
@@ -17,32 +20,56 @@ function Player(x, y) {
   this.img = playerimg;
 }
 
-Player.prototype.update = function (delta, input) {
-  const v = 0.5;
-  if (input.pressed["d"]) {
-    this.vx = v;
-  } else if (input.pressed["a"]) {
-    this.vx = -v;
+Player.prototype.update = function (input, w, h) {
+  // update velocity
+  if (input.pressed["d"] && this.vx < this.max) {
+    this.vx += this.a;
+  } else if (input.pressed["a"] && -this.vx < this.max) {
+    this.vx -= this.a;
+  } else if (this.vx > 0) {
+    this.vx -= this.f;
+    if (this.vx < 0) {
+      this.vx = 0;
+    }
+  } else if (this.vx < 0) {
+    this.vx += this.f;
+    if (this.vx > 0) {
+      this.vx = 0;
+    }
+  }
+
+  if (input.pressed["w"] && -this.vy < this.max) {
+    this.vy -= this.a;
+  } else if (input.pressed["s"] && this.vy < this.max) {
+    this.vy += this.a;
+  } else if (this.vy > 0) {
+    this.vy -= this.f;
+    if (this.vy < 0) {
+      this.vy = 0;
+    }
+  } else if (this.vy < 0) {
+    this.vy += this.f;
+    if (this.vy > 0) {
+      this.vy = 0;
+    }
+  }
+  // update position
+  const newx = this.x + this.vx;
+  const newy = this.y + this.vy;
+  if (0 < newx && newx + this.w < w) {
+    this.x = newx;
   } else {
     this.vx = 0;
   }
-  if (input.pressed["w"]) {
-    this.vy = -v;
-  } else if (input.pressed["s"]) {
-    this.vy = v;
+  if (0 < newy && newy + this.h < h) {
+    this.y = newy;
   } else {
     this.vy = 0;
   }
-  this.lastX = this.x;
-  this.lastY = this.y;
-  this.x += this.vx * delta;
-  this.y += this.vy * delta;
 };
 
-Player.prototype.draw = function (interp, ctx) {
-  var x = this.lastX + (this.x - this.lastX) * interp;
-  var y = this.lastY + (this.y - this.lastY) * interp;
-  ctx.drawImage(this.img, x, y);
+Player.prototype.draw = function (ctx) {
+  ctx.drawImage(this.img, this.x, this.y);
 };
 
 export default Player;

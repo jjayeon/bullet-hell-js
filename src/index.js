@@ -16,14 +16,14 @@ const ctx = c.getContext("2d");
 
 var player = new Player(200, c.height / 2);
 
-function update(delta) {
+function update() {
   ctx.fillStyle = "#ddf";
   ctx.fillRect(0, 0, c.width, c.height);
-  player.update(delta, input);
+  player.update(input, c.width, c.height);
 }
 
-function draw(interp) {
-  player.draw(interp, ctx);
+function draw() {
+  player.draw(ctx);
 }
 
 MainLoop.setUpdate(update).setDraw(draw).start();
