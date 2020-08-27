@@ -14,16 +14,16 @@ app.appendChild(c);
 
 const ctx = c.getContext("2d");
 
-var player = new Player(200, c.height / 2);
+var player = new Player(c, 200, c.height / 2);
 
 function update() {
   ctx.fillStyle = "#ddf";
   ctx.fillRect(0, 0, c.width, c.height);
-  player.update(input, c.width, c.height);
+  player.update(input);
 }
 
 function draw() {
-  player.draw(ctx);
+  player.draw();
 }
 
 MainLoop.setUpdate(update).setDraw(draw).start();
