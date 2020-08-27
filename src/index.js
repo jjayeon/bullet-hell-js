@@ -2,27 +2,31 @@ import MainLoop from "mainloop.js";
 import input from "@jjy/input";
 
 import Player from "./components/Player/Player.js";
+import Bullets from "./components/Bullets/Bullets.js";
 
 const app = document.getElementById("app");
-const c = document.createElement("canvas");
+const canvas = document.createElement("canvas");
 
-c.width = window.innerWidth;
-c.height = window.innerHeight;
-c.id = "canvas";
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.id = "canvas";
 
-app.appendChild(c);
+app.appendChild(canvas);
 
-const ctx = c.getContext("2d");
+const ctx = canvas.getContext("2d");
 
-var player = new Player(c, 200, c.height / 2);
+const player = new Player(canvas, 200, canvas.height / 2);
+const bullets = new Bullets(canvas, player);
 
-function update() {
+function update(delta) {
   ctx.fillStyle = "#ddf";
-  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  bullets.update(input, delta);
   player.update(input);
 }
 
 function draw() {
+  bullets.draw();
   player.draw();
 }
 
