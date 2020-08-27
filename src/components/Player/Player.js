@@ -5,7 +5,7 @@ function Player(canvas, x, y) {
   this.w = 50;
   this.h = 50;
 
-  this.x = { p: x, v: 0, a: 1.8, f: 0.3, m: 8, end: canvas.width - this.w };
+  this.x = { p: x, v: 0, a: 1.8, f: 0.3, m: 5, end: canvas.width - this.w };
   this.y = { p: y, v: 0, a: 1.8, f: 0.3, m: 8, end: canvas.height - this.h };
 
   const playerimg = new Image();
