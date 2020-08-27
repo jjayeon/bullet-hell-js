@@ -1,7 +1,7 @@
-import input from "@jjy/input";
 import MainLoop from "mainloop.js";
+import input from "@jjy/input";
 
-import playerimgurl from "./assets/player.png";
+import Player from "./components/Player/Player.js";
 
 const app = document.getElementById("app");
 const c = document.createElement("canvas");
@@ -14,59 +14,16 @@ app.appendChild(c);
 
 const ctx = c.getContext("2d");
 
-function Player() {
-  this.x = 200;
-  this.lastX = this.x;
-  this.y = c.height / 2;
-  this.lastY = this.y;
-
-  this.vx = 0;
-  this.vy = 0;
-
-  const playerimg = new Image();
-  playerimg.src = playerimgurl;
-  document.head.appendChild(playerimg);
-  this.img = playerimg;
-}
-
-Player.prototype.update = function (delta) {
-  const v = 0.5;
-  if (input.pressed["d"]) {
-    this.vx = v;
-  } else if (input.pressed["a"]) {
-    this.vx = -v;
-  } else {
-    this.vx = 0;
-  }
-  if (input.pressed["w"]) {
-    this.vy = -v;
-  } else if (input.pressed["s"]) {
-    this.vy = v;
-  } else {
-    this.vy = 0;
-  }
-  this.lastX = this.x;
-  this.lastY = this.y;
-  this.x += this.vx * delta;
-  this.y += this.vy * delta;
-};
-
-Player.prototype.draw = function (interp) {
-  var x = this.lastX + (this.x - this.lastX) * interp;
-  var y = this.lastY + (this.y - this.lastY) * interp;
-  ctx.drawImage(this.img, x, y);
-};
-
-var player = new Player();
+var player = new Player(200, c.height / 2);
 
 function update(delta) {
   ctx.fillStyle = "#ddf";
   ctx.fillRect(0, 0, c.width, c.height);
-  player.update(delta);
+  player.update(delta, input);
 }
 
 function draw(interp) {
-  player.draw(interp);
+  player.draw(interp, ctx);
 }
 
-MainLoop.setMaxAllowedFPS(Infinity).setUpdate(update).setDraw(draw).start();
+MainLoop.setUpdate(update).setDraw(draw).start();
