@@ -1,6 +1,8 @@
 import input from "@jjy/input";
 import MainLoop from "mainloop.js";
 
+import playerimgurl from "./assets/player.png";
+
 const app = document.getElementById("app");
 const c = document.createElement("canvas");
 
@@ -17,11 +19,14 @@ function Player() {
   this.lastX = this.x;
   this.y = c.height / 2;
   this.lastY = this.y;
-  this.side = 50;
-  this.color = "black";
 
   this.vx = 0;
   this.vy = 0;
+
+  const playerimg = new Image();
+  playerimg.src = playerimgurl;
+  document.head.appendChild(playerimg);
+  this.img = playerimg;
 }
 
 Player.prototype.update = function (delta) {
@@ -49,8 +54,7 @@ Player.prototype.update = function (delta) {
 Player.prototype.draw = function (interp) {
   var x = this.lastX + (this.x - this.lastX) * interp;
   var y = this.lastY + (this.y - this.lastY) * interp;
-  ctx.fillStyle = this.color;
-  ctx.fillRect(x, y, this.side, this.side);
+  ctx.drawImage(this.img, x, y);
 };
 
 var player = new Player();
