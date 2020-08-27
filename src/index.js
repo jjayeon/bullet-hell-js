@@ -3,6 +3,7 @@ import input from "@jjy/input";
 
 import Player from "./components/Player/Player.js";
 import Bullets from "./components/Bullets/Bullets.js";
+import Enemies from "./components/Enemies/Enemies.js";
 
 const app = document.getElementById("app");
 const canvas = document.createElement("canvas");
@@ -17,16 +18,19 @@ const ctx = canvas.getContext("2d");
 
 const player = new Player(canvas, 200, canvas.height / 2);
 const bullets = new Bullets(canvas, player);
+const enemies = new Enemies(canvas, bullets);
 
 function update(delta) {
   ctx.fillStyle = "#ddf";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   bullets.update(input, delta);
+  enemies.update();
   player.update(input);
 }
 
 function draw() {
   bullets.draw();
+  enemies.draw();
   player.draw();
 }
 

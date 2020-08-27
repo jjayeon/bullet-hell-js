@@ -42,6 +42,15 @@ Bullets.prototype.update = function (input, delta) {
 
 Bullets.prototype.draw = function () {
   const ctx = this.canvas.getContext("2d");
+  ctx.beginPath();
+  ctx.strokeStyle = "#f88";
+  ctx.lineWidth = 1;
+  ctx.moveTo(
+    this.player.x.p + this.player.w,
+    this.player.y.p + this.player.h / 2
+  );
+  ctx.lineTo(this.end, this.player.y.p + this.player.h / 2);
+  ctx.stroke();
   const img = this.img;
   this.children.forEach(function (item) {
     ctx.drawImage(img, item.x, item.y);
