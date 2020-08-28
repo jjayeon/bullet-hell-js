@@ -49,6 +49,7 @@ Bullets.prototype.update = function (input, delta) {
     const child = this.children[i];
     if (child.x > this.end) {
       this.children.splice(i, 1);
+      i--;
     }
   }
 
