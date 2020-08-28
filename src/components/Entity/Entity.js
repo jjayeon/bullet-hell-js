@@ -19,23 +19,17 @@ function Entity(canvas, x, y, width, height, img) {
   });
 }
 
-Entity.prototype.draw = function () {
-  this.canvas
-    .getContext("2d")
-    .drawImage(this.img, this.x, this.y, this.width, this.height);
-};
-
 Entity.prototype.inside = function (x, y) {
   return (
-    this.x < x &&
-    x < this.x + this.width &&
-    this.y < y &&
-    y < this.y + this.height
+    this.x <= x &&
+    x <= this.x + this.width &&
+    this.y <= y &&
+    y <= this.y + this.height
   );
 };
 
 Entity.prototype.collides = function (that) {
-  return (
+  return !!(
     this.inside(that.x, that.y) ||
     this.inside(that.x, that.y2) ||
     this.inside(that.x2, that.y) ||
@@ -45,6 +39,12 @@ Entity.prototype.collides = function (that) {
     that.inside(this.x2, this.y) ||
     that.inside(this.x2, this.y2)
   );
+};
+
+Entity.prototype.draw = function () {
+  this.canvas
+    .getContext("2d")
+    .drawImage(this.img, this.x, this.y, this.width, this.height);
 };
 
 export default Entity;
