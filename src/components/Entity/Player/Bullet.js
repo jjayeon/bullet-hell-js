@@ -1,13 +1,25 @@
 import Entity from "../Entity.js";
 
-function Bullet(canvas, x, y, yv, img) {
-  Entity.call(this, canvas, x, y, 10, 10, img);
-  // some other stuff we need to keep track of.
+function Bullet(canvas, player, img) {
+  Entity.call(
+    this,
+    canvas,
+    player.x + player.width,
+    player.y + player.height / 2,
+    10,
+    10,
+    img
+  );
   // bullet speed.
+  this.player = player;
   this.xvals.v = 2;
-  this.yvals.v = yv;
 }
 
 Bullet.prototype = Object.create(Entity.prototype);
+
+Bullet.prototype.update = function (delta) {
+  Entity.prototype.update.call(this, delta);
+  this.yvals.p = this.player.y + this.player.height / 2;
+};
 
 export default Bullet;

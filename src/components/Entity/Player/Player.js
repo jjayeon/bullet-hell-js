@@ -17,15 +17,7 @@ Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.fire = function () {
   if (this.cd.cur <= 0) {
-    this.bullets.push(
-      new Bullet(
-        this.canvas,
-        this.x + this.width,
-        this.y + this.height / 2,
-        this.yvals.v,
-        this.bulletimg
-      )
-    );
+    this.bullets.push(new Bullet(this.canvas, this, this.bulletimg));
     this.cd.cur = this.cd.max;
   }
 };
