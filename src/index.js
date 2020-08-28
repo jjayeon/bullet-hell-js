@@ -24,31 +24,32 @@ playerimg.src = playerimgurl;
 bulletimg.src = bulletimgurl;
 
 const player = new Player(canvas, 200, canvas.height / 2, playerimg, bulletimg);
+const playerAccel = 0.1;
 // const enemies = new Enemies(canvas, bullets);
 
 input.bind("w", function () {
-  player.yvals.a = -1.8;
+  player.yvals.a = -playerAccel;
 });
 input.upbind("w", function () {
   player.yvals.a = 0;
 });
 
 input.bind("a", function () {
-  player.xvals.a = -1.8;
+  player.xvals.a = -playerAccel;
 });
 input.upbind("a", function () {
   player.xvals.a = 0;
 });
 
 input.bind("s", function () {
-  player.yvals.a = 1.8;
+  player.yvals.a = playerAccel;
 });
 input.upbind("s", function () {
   player.yvals.a = 0;
 });
 
 input.bind("d", function () {
-  player.xvals.a = 1.8;
+  player.xvals.a = playerAccel;
 });
 input.upbind("d", function () {
   player.xvals.a = 0;
@@ -66,9 +67,9 @@ function update(delta) {
   player.update(delta);
 }
 
-function draw() {
+function draw(interp) {
   // enemies.draw();
-  player.draw();
+  player.draw(interp);
 }
 
 MainLoop.setUpdate(update).setDraw(draw).start();

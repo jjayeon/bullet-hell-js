@@ -1,18 +1,19 @@
 function Entity(canvas, x, y, width, height, img) {
+  this.fric = 0;
+  this.max = Infinity;
+
   this.xvals = {
+    last: x,
     p: x,
     v: 0,
     a: 0,
-    fric: 0.3,
-    max: 8,
     end: canvas.width - width,
   };
   this.yvals = {
+    last: y,
     p: y,
     v: 0,
     a: 0,
-    fric: 0.3,
-    max: 8,
     end: canvas.height - height,
   };
 
@@ -66,22 +67,30 @@ Entity.prototype.collides = function (that) {
   );
 };
 
-Entity.prototype.update = function () {
-  function update(vals) {
-    if (vals.a !== 0 && Math.abs(vals.v) < vals.max) {
-      vals.v += vals.a;
+Entity.prototype.update = function (delta) {
+  function update(vals, fric, max) {
+    vals.last = vals.p;
+
+    const newv = vals.v + vals.a * delta;
+    if (vals.a !== 0) {
+      if (Math.abs(newv) < max) {
+        vals.v = newv;
+      } else {
+        vals.v = max * Math.sign(newv);
+      }
     } else if (vals.v > 0) {
-      vals.v -= vals.fric;
+      vals.v -= fric;
       if (vals.v < 0) {
         vals.v = 0;
       }
     } else if (vals.v < 0) {
-      vals.v += vals.fric;
+      vals.v += fric;
       if (vals.v > 0) {
         vals.v = 0;
       }
     }
-    const newp = vals.p + vals.v;
+
+    const newp = vals.p + vals.v * delta;
     // if in bounds
     if (newp < 0) {
       vals.p = 0;
@@ -95,14 +104,16 @@ Entity.prototype.update = function () {
       vals.p = newp;
     }
   }
-  update(this.xvals);
-  update(this.yvals);
+  update(this.xvals, this.fric, this.max);
+  update(this.yvals, this.fric, this.max);
 };
 
-Entity.prototype.draw = function () {
+Entity.prototype.draw = function (interp) {
+  const x = this.xvals.last + (this.x - this.xvals.last) * interp;
+  const y = this.yvals.last + (this.y - this.yvals.last) * interp;
   this.canvas
     .getContext("2d")
-    .drawImage(this.img, this.x, this.y, this.width, this.height);
+    .drawImage(this.img, x, y, this.width, this.height);
 };
 
 export default Entity;

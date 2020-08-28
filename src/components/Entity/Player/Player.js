@@ -6,6 +6,9 @@ function Player(canvas, x, y, playerimg, bulletimg) {
   Entity.call(this, canvas, x, y, 50, 50, playerimg);
   this.bulletimg = bulletimg;
 
+  this.fric = 0.038;
+  this.max = 0.6;
+
   this.cd = { cur: 0, max: 500 };
   this.bullets = [];
 }
@@ -19,8 +22,6 @@ Player.prototype.fire = function () {
         this.canvas,
         this.x + this.width,
         this.y + this.height / 2,
-        this.bullets.length,
-        this.bullets,
         this.bulletimg
       )
     );
@@ -30,7 +31,7 @@ Player.prototype.fire = function () {
 
 Player.prototype.update = function (delta) {
   this.bullets.forEach(function (item) {
-    item.update();
+    item.update(delta);
   });
 
   for (var i = 0; i < this.bullets.length; i++) {
@@ -44,10 +45,10 @@ Player.prototype.update = function (delta) {
     this.cd.cur -= delta;
   }
 
-  Entity.prototype.update.call(this);
+  Entity.prototype.update.call(this, delta);
 };
 
-Player.prototype.draw = function () {
+Player.prototype.draw = function (interp) {
   const ctx = this.canvas.getContext("2d");
 
   // draw a laser sight.
@@ -62,7 +63,7 @@ Player.prototype.draw = function () {
     item.draw();
   });
 
-  Entity.prototype.draw.call(this);
+  Entity.prototype.draw.call(this, interp);
 };
 
 export default Player;
