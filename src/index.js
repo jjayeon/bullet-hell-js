@@ -2,8 +2,8 @@ import MainLoop from "mainloop.js";
 import input from "@jjy/input";
 
 import Player from "./components/Entity/Player/Player.js";
-import Bullets from "./components/Entity/Bullets/Bullets.js";
-import Enemies from "./components/Entity/Enemies/Enemies.js";
+import Bullets from "./components/Entity/Bullet/Bullet.js";
+import Enemies from "./components/Entity/Enemy/Enemy.js";
 
 import playerimgurl from "./assets/player.png";
 import bulletimgurl from "./assets/bullet.png";
@@ -27,6 +27,34 @@ const bulletimg = new Image();
 bulletimg.src = bulletimgurl;
 const bullets = new Bullets(canvas, player, bulletimg);
 const enemies = new Enemies(canvas, bullets);
+
+input.bind("w", function () {
+  player.yvals.a = -1.8;
+});
+input.upbind("w", function () {
+  player.yvals.a = 0;
+});
+
+input.bind("a", function () {
+  player.xvals.a = -1.8;
+});
+input.upbind("a", function () {
+  player.xvals.a = 0;
+});
+
+input.bind("s", function () {
+  player.yvals.a = 1.8;
+});
+input.upbind("s", function () {
+  player.yvals.a = 0;
+});
+
+input.bind("d", function () {
+  player.xvals.a = 1.8;
+});
+input.upbind("d", function () {
+  player.xvals.a = 0;
+});
 
 function update(delta) {
   ctx.fillStyle = "#ddf";

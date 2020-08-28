@@ -7,7 +7,14 @@ describe("testing Entity.js", function () {
   describe("testing creation and properties", function () {
     var entity;
     before(function () {
-      entity = new Entity({ success: true }, 40, 50, 60, 70, { success: true });
+      entity = new Entity(
+        { width: 50, height: 50, success: true },
+        40,
+        50,
+        60,
+        70,
+        { success: true }
+      );
       // canvas and img can't exist without the DOM, so mocha can't really test for them.
     });
     it("basic variables", function () {
@@ -32,8 +39,22 @@ describe("testing Entity.js", function () {
     });
     it("collides()", function () {
       entity = new Entity({}, 100, 100, 100, 100, {});
-      const entity2 = new Entity({}, 300, 300, 100, 100, {});
-      const entity3 = new Entity({}, 150, 150, 100, 100, {});
+      const entity2 = new Entity(
+        { width: 50, height: 50, success: true },
+        300,
+        300,
+        100,
+        100,
+        {}
+      );
+      const entity3 = new Entity(
+        { width: 50, height: 50, success: true },
+        150,
+        150,
+        100,
+        100,
+        {}
+      );
 
       assert(!entity.collides(entity2), "!entity.collides(entity2)");
       assert(!entity2.collides(entity), "!entity2.collides(entity)");

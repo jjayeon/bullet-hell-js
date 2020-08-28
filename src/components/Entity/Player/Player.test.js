@@ -1,19 +1,21 @@
 /* eslint-disable no-undef */
-import assert from "assert";
+const assert = require("assert").strict;
 
 import Player from "./Player.js";
 
 describe("testing Player.js", function () {
   function Defaults(x, width) {
-    this.p = x;
-    this.v = 0;
-    this.a = 1.8;
-    this.fric = 0.3;
-    this.max = 8;
-    this.end = width - 50;
+    return {
+      p: x,
+      v: 0,
+      a: 0,
+      fric: 0.3,
+      max: 8,
+      end: width - 50,
+    };
   }
-  const defaultx = new Defaults(200, 800);
-  const defaulty = new Defaults(300, 600);
+  const defaultx = Defaults(200, 800);
+  const defaulty = Defaults(300, 600);
   var player;
   beforeEach(function () {
     player = new Player({ width: 800, height: 600 }, 200, 300);
@@ -31,34 +33,42 @@ describe("testing Player.js", function () {
     assert.deepEqual(player.yvals, defaulty);
   });
   it("single update with w", function () {
-    var newvals = new Defaults(300, 600);
+    var newvals = Defaults(300, 600);
+    newvals.a = -1.8;
     newvals.v = -1.8;
     newvals.p = 300 - 1.8;
-    player.update({ pressed: { w: true } });
+    player.yvals.a = -1.8;
+    player.update();
     assert.deepEqual(player.xvals, defaultx);
     assert.deepEqual(player.yvals, newvals);
   });
   it("single update with s", function () {
-    var newvals = new Defaults(300, 600);
+    var newvals = Defaults(300, 600);
+    newvals.a = 1.8;
     newvals.v = 1.8;
     newvals.p = 300 + 1.8;
-    player.update({ pressed: { s: true } });
+    player.yvals.a = 1.8;
+    player.update();
     assert.deepEqual(player.xvals, defaultx);
     assert.deepEqual(player.yvals, newvals);
   });
   it("single update with a", function () {
-    var newvals = new Defaults(200, 800);
+    var newvals = Defaults(200, 800);
+    newvals.a = -1.8;
     newvals.v = -1.8;
     newvals.p = 200 - 1.8;
-    player.update({ pressed: { a: true } });
+    player.xvals.a = -1.8;
+    player.update();
     assert.deepEqual(player.xvals, newvals);
     assert.deepEqual(player.yvals, defaulty);
   });
   it("single update with d", function () {
-    var newvals = new Defaults(200, 800);
+    var newvals = Defaults(200, 800);
+    newvals.a = 1.8;
     newvals.v = 1.8;
     newvals.p = 200 + 1.8;
-    player.update({ pressed: { d: true } });
+    player.xvals.a = 1.8;
+    player.update();
     assert.deepEqual(player.xvals, newvals);
     assert.deepEqual(player.yvals, defaulty);
   });
