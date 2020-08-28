@@ -1,6 +1,4 @@
-import bulletimgurl from "./bullet.png";
-
-function Bullets(canvas, player) {
+function Bullets(canvas, player, bulletimg) {
   // some other stuff we need to keep track of.
   this.canvas = canvas;
   this.player = player;
@@ -16,8 +14,6 @@ function Bullets(canvas, player) {
   // the bullets themselves.
   this.children = [];
 
-  const bulletimg = new Image();
-  bulletimg.src = bulletimgurl;
   this.img = bulletimg;
 }
 

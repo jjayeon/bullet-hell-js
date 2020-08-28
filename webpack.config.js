@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -19,7 +20,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
       },
-      { test: /\.(png|svg|jpg|gif)$/, use: "file-loader" },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: "file-loader",
+        options: {
+          name: "[path][name].[ext]",
+        },
+      },
     ],
   },
   plugins: [
