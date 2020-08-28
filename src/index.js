@@ -16,7 +16,10 @@ app.appendChild(canvas);
 
 const ctx = canvas.getContext("2d");
 
-const player = new Player(canvas, 200, canvas.height / 2);
+const playerimg = new Image();
+playerimg.src = require("./assets/player.png"); //eslint-disable-line no-undef
+const player = new Player(canvas, 200, canvas.height / 2, playerimg);
+
 const bullets = new Bullets(canvas, player);
 const enemies = new Enemies(canvas, bullets);
 

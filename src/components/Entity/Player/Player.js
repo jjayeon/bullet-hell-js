@@ -1,11 +1,7 @@
 import Entity from "../Entity.js";
-import playerimgurl from "./player.png";
-
-const playerimg = new Image();
-playerimg.src = playerimgurl;
 
 // constructor function for the player.
-function Player(canvas, x, y) {
+function Player(canvas, x, y, playerimg) {
   Entity.call(this, canvas, x, y, 50, 50, playerimg);
 
   // p = position, v = velocity, a = acceleration.
