@@ -32,7 +32,7 @@ describe("testing Player.js", function () {
     assert.deepEqual(player.xvals, defaultx);
     assert.deepEqual(player.yvals, defaulty);
   });
-  it("single update with w", function () {
+  it("single update going up", function () {
     var newvals = Defaults(300, 600);
     newvals.a = -1.8;
     newvals.v = -1.8;
@@ -42,7 +42,7 @@ describe("testing Player.js", function () {
     assert.deepEqual(player.xvals, defaultx);
     assert.deepEqual(player.yvals, newvals);
   });
-  it("single update with s", function () {
+  it("single update going down", function () {
     var newvals = Defaults(300, 600);
     newvals.a = 1.8;
     newvals.v = 1.8;
@@ -52,7 +52,7 @@ describe("testing Player.js", function () {
     assert.deepEqual(player.xvals, defaultx);
     assert.deepEqual(player.yvals, newvals);
   });
-  it("single update with a", function () {
+  it("single update going left", function () {
     var newvals = Defaults(200, 800);
     newvals.a = -1.8;
     newvals.v = -1.8;
@@ -62,7 +62,7 @@ describe("testing Player.js", function () {
     assert.deepEqual(player.xvals, newvals);
     assert.deepEqual(player.yvals, defaulty);
   });
-  it("single update with d", function () {
+  it("single update going right", function () {
     var newvals = Defaults(200, 800);
     newvals.a = 1.8;
     newvals.v = 1.8;
