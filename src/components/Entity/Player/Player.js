@@ -22,6 +22,7 @@ Player.prototype.fire = function () {
         this.canvas,
         this.x + this.width,
         this.y + this.height / 2,
+        this.yvals.v,
         this.bulletimg
       )
     );
@@ -60,7 +61,7 @@ Player.prototype.draw = function (interp) {
   ctx.stroke();
 
   this.bullets.forEach(function (item) {
-    item.draw();
+    item.draw(interp);
   });
 
   Entity.prototype.draw.call(this, interp);
