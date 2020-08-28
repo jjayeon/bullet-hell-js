@@ -1,78 +1,14 @@
-function Bullets(canvas, player, bulletimg) {
+import Entity from "../Entity.js";
+
+function Bullet(canvas, x, y, i, parent, img) {
+  Entity.call(this, canvas, x, y, 10, 10, img);
   // some other stuff we need to keep track of.
-  this.canvas = canvas;
-  this.player = player;
-
-  // state variables.
-  // an internal cooldown on the player's fire rate.
-  this.cd = { cur: 0, max: 500 };
   // bullet speed.
-  this.v = 40;
-  // endpoint for the bullets.
-  this.end = canvas.width;
-
-  // the bullets themselves.
-  this.children = [];
-
-  this.img = bulletimg;
-}
-
-function Bullet(i, x, y) {
   this.i = i;
-  this.x = x;
-  this.y = y;
+  this.parent = parent;
+  this.xvals.v = 40;
 }
 
-Bullets.prototype.update = function (input, delta) {
-  if (input.pressed[" "]) {
-    if (this.cd.cur <= 0) {
-      this.children.push(
-        new Bullet(
-          this.children.length,
-          this.player.x.p + this.player.width,
-          this.player.y.p + this.player.height / 2
-        )
-      );
-      this.cd.cur = this.cd.max;
-    }
-  }
+Bullet.prototype = Object.create(Entity.prototype);
 
-  this.children.forEach((item) => {
-    item.x += this.v;
-  });
-
-  for (var i = 0; i < this.children.length; i++) {
-    const child = this.children[i];
-    if (child.x > this.end) {
-      this.children.splice(i, 1);
-      i--;
-    }
-  }
-
-  if (this.cd.cur > 0) {
-    this.cd.cur -= delta;
-  }
-};
-
-Bullets.prototype.draw = function () {
-  const ctx = this.canvas.getContext("2d");
-
-  // draw a laser sight.
-  ctx.beginPath();
-  ctx.strokeStyle = "#f88";
-  ctx.lineWidth = 1;
-  ctx.moveTo(
-    this.player.x + this.player.width,
-    this.player.y + this.player.height / 2
-  );
-  ctx.lineTo(this.end, this.player.y + this.player.height / 2);
-  ctx.stroke();
-
-  // render each bullet.
-  const img = this.img;
-  this.children.forEach(function (item) {
-    ctx.drawImage(img, item.x, item.y);
-  });
-};
-
-export default Bullets;
+export default Bullet;

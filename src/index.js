@@ -2,8 +2,7 @@ import MainLoop from "mainloop.js";
 import input from "@jjy/input";
 
 import Player from "./components/Entity/Player/Player.js";
-import Bullets from "./components/Entity/Bullet/Bullet.js";
-import Enemies from "./components/Entity/Enemy/Enemy.js";
+// import Enemies from "./components/Entity/Enemy/Enemy.js";
 
 import playerimgurl from "./assets/player.png";
 import bulletimgurl from "./assets/bullet.png";
@@ -20,13 +19,12 @@ app.appendChild(canvas);
 const ctx = canvas.getContext("2d");
 
 const playerimg = new Image();
-playerimg.src = playerimgurl;
-const player = new Player(canvas, 200, canvas.height / 2, playerimg);
-
 const bulletimg = new Image();
+playerimg.src = playerimgurl;
 bulletimg.src = bulletimgurl;
-const bullets = new Bullets(canvas, player, bulletimg);
-const enemies = new Enemies(canvas, bullets);
+
+const player = new Player(canvas, 200, canvas.height / 2, playerimg, bulletimg);
+// const enemies = new Enemies(canvas, bullets);
 
 input.bind("w", function () {
   player.yvals.a = -1.8;
@@ -59,14 +57,17 @@ input.upbind("d", function () {
 function update(delta) {
   ctx.fillStyle = "#ddf";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  bullets.update(input, delta);
-  enemies.update();
-  player.update(input);
+
+  if (input.pressed[" "]) {
+    player.fire();
+  }
+
+  // enemies.update();
+  player.update(delta);
 }
 
 function draw() {
-  bullets.draw();
-  enemies.draw();
+  // enemies.draw();
   player.draw();
 }
 

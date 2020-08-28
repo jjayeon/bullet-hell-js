@@ -83,12 +83,16 @@ Entity.prototype.update = function () {
     }
     const newp = vals.p + vals.v;
     // if in bounds
-    if (0 < newp && newp < vals.end) {
-      vals.p = newp;
-    } else {
+    if (newp < 0) {
+      vals.p = 0;
+      vals.v = 0;
       // if we're here, we hit the edge, so set v to 0.
       // without this line, the player sticks to the walls in a weird way.
+    } else if (newp > vals.end) {
+      vals.p = vals.end;
       vals.v = 0;
+    } else {
+      vals.p = newp;
     }
   }
   update(this.xvals);
