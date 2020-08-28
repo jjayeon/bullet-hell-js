@@ -66,10 +66,10 @@ Bullets.prototype.draw = function () {
   ctx.strokeStyle = "#f88";
   ctx.lineWidth = 1;
   ctx.moveTo(
-    this.player.x.p + this.player.width,
-    this.player.y.p + this.player.height / 2
+    this.player.x + this.player.width,
+    this.player.y + this.player.height / 2
   );
-  ctx.lineTo(this.end, this.player.y.p + this.player.height / 2);
+  ctx.lineTo(this.end, this.player.y + this.player.height / 2);
   ctx.stroke();
 
   // render each bullet.

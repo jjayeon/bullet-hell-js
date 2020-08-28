@@ -1,9 +1,9 @@
 import MainLoop from "mainloop.js";
 import input from "@jjy/input";
 
-import Player from "./components/Player/Player.js";
-import Bullets from "./components/Bullets/Bullets.js";
-import Enemies from "./components/Enemies/Enemies.js";
+import Player from "./components/Entity/Player/Player.js";
+import Bullets from "./components/Entity/Bullets/Bullets.js";
+import Enemies from "./components/Entity/Enemies/Enemies.js";
 
 const app = document.getElementById("app");
 const canvas = document.createElement("canvas");
