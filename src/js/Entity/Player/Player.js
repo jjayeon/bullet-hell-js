@@ -8,7 +8,9 @@ function Player(canvas, x, y, playerimg, bulletimg) {
 
   this.accel = 0.1;
   this.fric = 0.038;
-  this.max = 0.6;
+
+  this.xvals.max = 0.6;
+  this.yvals.max = 0.6;
 
   this.up = false;
   this.down = false;

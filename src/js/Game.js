@@ -50,7 +50,7 @@ function Game() {
       player.fire();
     }
 
-    if (enemies.length < 10 && Math.random() < 0.05) {
+    if (enemies.length < 5 && Math.random() < 0.05) {
       enemies.push(
         new Enemy(
           canvas,

@@ -1,12 +1,12 @@
 function Entity(canvas, x, y, width, height, img) {
   this.fric = 0;
-  this.max = Infinity;
 
   this.xvals = {
     last: x,
     p: x,
     v: 0,
     a: 0,
+    max: Infinity,
     end: canvas.width - width,
   };
   this.yvals = {
@@ -14,6 +14,7 @@ function Entity(canvas, x, y, width, height, img) {
     p: y,
     v: 0,
     a: 0,
+    max: Infinity,
     end: canvas.height - height,
   };
 
@@ -68,15 +69,15 @@ Entity.prototype.collides = function (that) {
 };
 
 Entity.prototype.update = function (delta) {
-  function update(vals, fric, max) {
+  function update(vals, fric) {
     vals.last = vals.p;
 
     const newv = vals.v + vals.a * delta;
     if (vals.a !== 0) {
-      if (Math.abs(newv) < max) {
+      if (Math.abs(newv) < vals.max) {
         vals.v = newv;
       } else {
-        vals.v = max * Math.sign(newv);
+        vals.v = vals.max * Math.sign(newv);
       }
     } else if (vals.v > 0) {
       vals.v -= fric;
@@ -104,8 +105,8 @@ Entity.prototype.update = function (delta) {
       vals.p = newp;
     }
   }
-  update(this.xvals, this.fric, this.max);
-  update(this.yvals, this.fric, this.max);
+  update(this.xvals, this.fric);
+  update(this.yvals, this.fric);
 };
 
 Entity.prototype.draw = function (interp) {

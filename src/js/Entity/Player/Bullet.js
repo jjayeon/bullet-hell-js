@@ -6,8 +6,8 @@ function Bullet(canvas, player, img) {
     canvas,
     player.x + player.width,
     player.y + player.height / 2,
-    10,
-    10,
+    20,
+    20,
     img
   );
   // bullet speed.
