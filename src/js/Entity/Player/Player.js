@@ -6,7 +6,7 @@ function Player(canvas, x, y, playerimg, bulletimg) {
   Entity.call(this, canvas, x, y, 25, 25, playerimg);
   this.bulletimg = bulletimg;
 
-  this.accel = 0.1;
+  this.accel = 0.03;
   this.fric = 0.038;
 
   this.xvals.max = 0.6;
