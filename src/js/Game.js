@@ -8,17 +8,7 @@ import playerimgurl from "../assets/player.png";
 import bulletimgurl from "../assets/bullet.png";
 import enemyimgurl from "../assets/enemy.png";
 
-function Game() {
-  const app = document.getElementById("app");
-  const canvas = document.createElement("canvas");
-
-  canvas.width = 1200;
-  canvas.height = 600;
-  canvas.id = "canvas";
-  canvas.style = "padding: 0; margin: auto; display: block;";
-
-  app.appendChild(canvas);
-
+function Game(canvas) {
   const ctx = canvas.getContext("2d");
 
   const playerimg = new Image();
@@ -120,4 +110,4 @@ function Game() {
 
   return MainLoop;
 }
-export default Game();
+export default Game;
