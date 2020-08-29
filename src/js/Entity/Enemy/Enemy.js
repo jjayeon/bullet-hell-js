@@ -1,7 +1,7 @@
 import Entity from "../Entity.js";
 
 function Enemy(canvas, x, y, img) {
-  Entity.call(canvas, x, y, 50, 50, img);
+  Entity.call(this, canvas, x, y, 50, 50, img);
 }
 
 Enemy.prototype = Object.create(Entity.prototype);

@@ -3,11 +3,17 @@ import Bullet from "./Bullet.js";
 
 // constructor function for the player.
 function Player(canvas, x, y, playerimg, bulletimg) {
-  Entity.call(this, canvas, x, y, 50, 50, playerimg);
+  Entity.call(this, canvas, x, y, 25, 25, playerimg);
   this.bulletimg = bulletimg;
 
+  this.accel = 0.1;
   this.fric = 0.038;
   this.max = 0.6;
+
+  this.up = false;
+  this.down = false;
+  this.left = false;
+  this.right = false;
 
   this.cd = { cur: 0, max: 500 };
   this.bullets = [];
@@ -23,6 +29,9 @@ Player.prototype.fire = function () {
 };
 
 Player.prototype.update = function (delta) {
+  this.xvals.a = -(this.left && this.accel) + (this.right && this.accel);
+  this.yvals.a = -(this.up && this.accel) + (this.down && this.accel);
+
   this.bullets.forEach(function (item) {
     item.update(delta);
   });
