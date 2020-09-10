@@ -12,7 +12,7 @@ class Entity {
       a: xvals.a || 0,
       fric: xvals.fric || 0,
       max: xvals.max || Infinity,
-      end: xvals.end || canvas.height - height,
+      end: canvas.width - width,
     };
 
     this._yvals = {
@@ -22,7 +22,7 @@ class Entity {
       a: yvals.a || 0,
       fric: yvals.fric || 0,
       max: yvals.max || Infinity,
-      end: yvals.end || canvas.height - height,
+      end: canvas.height - height,
     };
   }
 
