@@ -871,6 +871,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@jjy/canvas-sprite-animations@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@jjy/canvas-sprite-animations/-/canvas-sprite-animations-1.0.0.tgz#25e6d11f60bc9660fab3c5bccfb049bdf8411d42"
+  integrity sha512-0xcEDbj2kbf85zFDgF/Glp523TxHYwXY/dTTREi1NU62xxntwhdTB6hiT78csyqPv/1QFePC4bsos9rdiq1R6g==
+
 "@jjy/input@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@jjy/input/-/input-1.0.0.tgz#d9235d92e5ceba3d746e3f2224bde7e4ab617eda"
