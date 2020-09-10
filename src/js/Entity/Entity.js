@@ -114,28 +114,12 @@ class Entity {
 
   // getters
 
-  get width() {
-    return this._width;
-  }
-
-  get height() {
-    return this._height;
-  }
-
   get x() {
     return this._xvals.p;
   }
 
   get x2() {
     return this._xvals.p + this.width;
-  }
-
-  get vx() {
-    return this._xvals.v;
-  }
-
-  get ax() {
-    return this._xvals.a;
   }
 
   get y() {
@@ -146,12 +130,12 @@ class Entity {
     return this._yvals.p + this.height;
   }
 
-  get vy() {
-    return this._yvals.v;
+  get width() {
+    return this._width;
   }
 
-  get ay() {
-    return this._yvals.a;
+  get height() {
+    return this._height;
   }
 }
 
