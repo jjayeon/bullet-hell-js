@@ -1,27 +1,29 @@
 import Entity from "../Entity.js";
 
-function Enemy(canvas, x, y, img) {
-  Entity.call(this, canvas, x, y, 50, 50, img);
+class Enemy extends Entity {
+  constructor(canvas, x, y, img) {
+    const a = 0.0001;
+    super(
+      canvas,
+      { last: x, p: x, a: a, max: 0.1 },
+      { last: y, p: y, a: a, max: 0.3 },
+      50,
+      50,
+      img
+    );
+  }
 
-  this.xvals.a = 0.0001;
-  this.yvals.a = 0.0001;
+  update(delta) {
+    if (this.x <= 0 || this.x >= this._xvals.end || Math.random() < 0.01) {
+      this._xvals.a *= -1;
+    }
 
-  this.xvals.max = 0.1;
-  this.yvals.max = 0.3;
+    if (this.y <= 0 || this.y >= this._yvals.end || Math.random() < 0.01) {
+      this._yvals.a *= -1;
+    }
+
+    super.update(delta);
+  }
 }
-
-Enemy.prototype = Object.create(Entity.prototype);
-
-Enemy.prototype.update = function (delta) {
-  if (this.x <= 0 || this.x >= this.xvals.end || Math.random() < 0.01) {
-    this.xvals.a *= -1;
-  }
-
-  if (this.y <= 0 || this.y >= this.yvals.end || Math.random() < 0.01) {
-    this.yvals.a *= -1;
-  }
-
-  Entity.prototype.update.call(this, delta);
-};
 
 export default Enemy;

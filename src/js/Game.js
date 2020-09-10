@@ -33,9 +33,6 @@ function Game(canvas) {
       return min + Math.random() * (max - min);
     }
 
-    ctx.fillStyle = "#ddf";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     if (input.pressed[" "]) {
       player.fire();
     }
@@ -53,11 +50,10 @@ function Game(canvas) {
 
     for (var i = 0; i < enemies.length; i++) {
       const enemy = enemies[i];
-      for (var j = 0; j < player.bullets.length; j++) {
-        const bullet = player.bullets[j];
-        if (enemy.collides(bullet)) {
+      for (var j = 0; j < player.numBullets; j++) {
+        if (enemy.collides(player.bulletAt(j))) {
           enemies.splice(i--, 1);
-          player.bullets.splice(j, 1);
+          player.despawnBullet(j);
           break;
         }
       }
@@ -71,6 +67,9 @@ function Game(canvas) {
   }
 
   function draw(interp) {
+    ctx.fillStyle = "#ddf";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     enemies.forEach(function (enemy) {
       enemy.draw(interp);
     });
@@ -79,31 +78,31 @@ function Game(canvas) {
   }
 
   input.bind("w", function () {
-    player.up = true;
+    player.up(true);
   });
   input.upbind("w", function () {
-    player.up = false;
+    player.up(false);
   });
 
   input.bind("a", function () {
-    player.left = true;
+    player.left(true);
   });
   input.upbind("a", function () {
-    player.left = false;
+    player.left(false);
   });
 
   input.bind("s", function () {
-    player.down = true;
+    player.down(true);
   });
   input.upbind("s", function () {
-    player.down = false;
+    player.down(false);
   });
 
   input.bind("d", function () {
-    player.right = true;
+    player.right(true);
   });
   input.upbind("d", function () {
-    player.right = false;
+    player.right(false);
   });
 
   MainLoop.setUpdate(update).setDraw(draw);
