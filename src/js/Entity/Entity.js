@@ -26,16 +26,29 @@ class Entity {
     };
   }
 
-  // example of valid vals object:
-  // {
-  //     last: 0,
-  //     p: 0,
-  //     v: 0,
-  //     a: 0,
-  //     fric: 0,
-  //     max: Infinity,
-  //     end: canvas.height - height,
-  // }
+  get x() {
+    return this._xvals.p;
+  }
+
+  get x2() {
+    return this._xvals.p + this.width;
+  }
+
+  get y() {
+    return this._yvals.p;
+  }
+
+  get y2() {
+    return this._yvals.p + this.height;
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  get height() {
+    return this._height;
+  }
 
   inside(x, y) {
     return !!(
@@ -110,32 +123,6 @@ class Entity {
     this._canvas
       .getContext("2d")
       .drawImage(this._img, x, y, this.width, this.height);
-  }
-
-  // getters
-
-  get x() {
-    return this._xvals.p;
-  }
-
-  get x2() {
-    return this._xvals.p + this.width;
-  }
-
-  get y() {
-    return this._yvals.p;
-  }
-
-  get y2() {
-    return this._yvals.p + this.height;
-  }
-
-  get width() {
-    return this._width;
-  }
-
-  get height() {
-    return this._height;
   }
 }
 
