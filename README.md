@@ -2,6 +2,8 @@
 
 A bullet hell game written in pure Javascript. Proof of concept for Input.js + Canvas. 
 
+Play here: https://bullet-hell-js.netlify.app/
+
 ## packages:
 
 npm and Yarn for package management, of course.
