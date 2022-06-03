@@ -24,8 +24,8 @@
         "@jjy/input": "^1.0.0",
         "mainloop.js": "^1.0.4"
     },
-    "name": "jjy-npm-template",
-    "description": "The various npm packages used by developer jjy (jjayeon).",
+    "name": "bullet-hell-js",
+    "description": "A bullet hell shooter written in pure, native Javascript and minimal libraries.",
     "version": "1.0.0",
     "homepage": "https://autumnchiu.com/bullet-hell-js",
     "main": "src/index.js",
@@ -43,7 +43,7 @@
     "author": "jjayeon",
     "license": "Unlicense",
     "bugs": {
-        "url": "https://github.com/jjayeon/draw-with-me-solo/issues"
+        "url": "https://github.com/jjayeon/bullet-hell-js/issues"
     },
-    "homepage": "https://github.com/jjayeon/draw-with-me-solo#readme"
+    "homepage": "https://github.com/jjayeon/bullet-hell-js#readme"
 }
